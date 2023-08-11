@@ -33,6 +33,9 @@ function getReactionsOfEmojiByPostAuthor(emoji) {
         authorToEmojiCount[message.user] = 0;
       }
       authorToEmojiCount[message.user] += message.reactions[emojiIndex].count;
+
+      // subtract one from reaction counts if the message author contributed with a reaction
+      if (message.reactions[emojiIndex].users.indexOf(message.user) != -1) authorToEmojiCount[message.user] -= 1;
   
     }
     console.log(`Found ${Object.keys(authorToEmojiCount).length} users with reactions, finding names`)
